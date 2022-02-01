@@ -10,11 +10,18 @@ let gridSizeButton = document.getElementById("confirm");
 //numero dei box da mettere nella griglia
 let boxNumbers = 0;
 
+//variabile globale che segna il punteggio (cioè le volte in cui l'utente non prende bombe)
+let goodClicks = 0;
+
 
 gridSizeButton.addEventListener("click", function(){
 
     //Prima di tutto rimuovo la griglia precedente
     gridContainer.innerHTML = "";
+
+    //reset del punteggio e della scritta addetta
+    goodClicks = 0;
+    document.getElementById("tentativi").innerHTML = "";
 
 
 
@@ -28,19 +35,19 @@ gridSizeButton.addEventListener("click", function(){
     }
 
     //creazione della griglia che prende come parametri il numero dei quadrati, e la stringa della difficoltà
-    let node = createGrid(gridContainer, boxNumbers, difficultySelection.value);
+    createGrid(gridContainer, boxNumbers, difficultySelection.value);
 
 
 });
 
-
+let arrayBombs;
 
 //la funzione di creazione griglia prende come parametri la griglia, il numero di quadrati e la stringa della dificoltà
 function createGrid(grid, number, difficulty){
 
     //array che contiene il posto di tutte le bombe
     const BOMBS = 16;
-    let arrayBombs = bombsGenerator(BOMBS, boxNumbers);
+    arrayBombs = bombsGenerator(BOMBS, boxNumbers);
     console.log(arrayBombs);
     
 
@@ -68,8 +75,6 @@ function createGrid(grid, number, difficulty){
         grid.appendChild(node);
 
     }
-
-    return node;
 
 }
 
@@ -103,12 +108,32 @@ function checkBomb(){
     
     this.removeEventListener("click", checkBomb);
 
-    if(arrayBombs.includes(this.innerText)){
+    if(arrayBombs.includes(parseInt(this.innerText))){
         this.classList.add("exploded");
+
+        showOtherBombs();
+
+        //mostro il punteggio a fine gioco
+        document.getElementById("tentativi").innerHTML = "Hai fatto " + goodClicks + " punti";
+        
     }else{
         this.classList.add("clicked");
+        goodClicks++; //incremento la variabile che segna il punteggio
     }
 
+}
+
+
+//funzione che mostra tutte le bombe una volta colpita una
+function showOtherBombs(){
+    let cellBombs = document.querySelectorAll(".box");
+
+    for(let i = 0; i < cellBombs.length - 1; i++){
+        
+        if(arrayBombs.includes(parseInt(cellBombs[i].innerText))){
+            cellBombs[i].classList.add("exploded");
+        }
+    }
 }
 
 

@@ -40,6 +40,8 @@ main{
     display: flex;
     justify-content: center;
     align-items: center;
+
+    position: relative;
 }
 
 main #grid{
@@ -58,6 +60,11 @@ main .box{
     justify-content: center;
     align-items: center;
 
+}
+
+p#tentativi {
+    position: absolute;
+    top: 30px;
 }
 
 .box:hover{
