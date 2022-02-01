@@ -1,0 +1,98 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header{
+    height: 70px;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+header h1{
+    display: inline-block;
+    margin-left: 15px;
+    position: relative;
+    bottom: 15px;
+}
+
+header p{
+    display: inline-block;
+}
+
+header select{
+    width: 170px;
+}
+
+header button{
+    padding: 0 20px;
+}
+
+
+main{
+    width: 100%;
+    height: calc(100vh - 110px);
+    background-color: #7fffd4;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+main #grid{
+    width: 400px;
+    height: 400px;
+    margin: 20px auto;
+
+    display: flex;
+    flex-wrap: wrap;
+}
+
+main .box{
+    border: 1px solid black;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.box:hover{
+    cursor: pointer;
+}
+
+main .box.clicked{
+    background-color: #6495ed;
+}
+
+main .box.exploded{
+    background-color: red;
+}
+
+main .box.easy{
+    width: calc(100% / 10);
+    height: calc(100% / 10);
+}
+
+main .box.normal{
+    width: calc(100% / 9);
+    height: calc(100% / 9);
+}
+main .box.hard{
+    width: calc(100% / 7);
+    height: calc(100% / 7);
+}
+
+
+footer{
+    height: 40px;
+    display: flex;
+    align-items: center;
+}
+
+footer p{
+    margin-left: 200px;
+}
