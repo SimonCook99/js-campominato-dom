@@ -111,7 +111,7 @@ function checkBomb(){
     if(arrayBombs.includes(parseInt(this.innerText))){
         this.classList.add("exploded");
 
-        showOtherBombs();
+        clearGame();
 
         //mostro il punteggio a fine gioco
         document.getElementById("tentativi").innerHTML = "Hai fatto " + goodClicks + " punti";
@@ -124,8 +124,8 @@ function checkBomb(){
 }
 
 
-//funzione che mostra tutte le bombe una volta colpita una
-function showOtherBombs(){
+//funzione che mostra tutte le bombe una volta colpita una, e rimuove il click delle altre celle
+function clearGame(){
     let cellBombs = document.querySelectorAll(".box");
 
     for(let i = 0; i < cellBombs.length - 1; i++){
@@ -133,6 +133,9 @@ function showOtherBombs(){
         if(arrayBombs.includes(parseInt(cellBombs[i].innerText))){
             cellBombs[i].classList.add("exploded");
         }
+
+        cellBombs[i].removeEventListener("click", checkBomb);
+
     }
 }
 
